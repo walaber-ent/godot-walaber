@@ -7977,7 +7977,9 @@ void TextEdit::_update_scrollbars() {
 		total_rows += visible_rows - 1;
 	}
 
-	int visible_width = size.width - theme_cache.style_normal->get_minimum_size().width;
+	// walaber change 2025.03.24 - reduce visible_width by the scrollbar size and some padding for the caret
+	const int caret_width = theme_cache.caret_width * MAX(1, theme_cache.base_scale);
+	int visible_width = size.width - theme_cache.style_normal->get_minimum_size().width - hmin.x - (caret_width * 3);
 	int total_width = (draw_placeholder ? placeholder_max_width : text.get_max_width()) + gutters_width + gutter_padding;
 
 	if (draw_minimap) {
