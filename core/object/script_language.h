@@ -322,6 +322,7 @@ public:
 		Vector<Pair<int, int>> last_matches = { { -1, -1 } }; // This value correspond to an impossible match
 		int location = LOCATION_OTHER;
 		String theme_color_name;
+		int sort_bias;
 
 		CodeCompletionOption() {}
 

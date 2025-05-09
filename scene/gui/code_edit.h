@@ -334,6 +334,7 @@ protected:
 	GDVIRTUAL1(_confirm_code_completion, bool)
 	GDVIRTUAL1(_request_code_completion, bool)
 	GDVIRTUAL1RC(TypedArray<Dictionary>, _filter_code_completion_candidates, TypedArray<Dictionary>)
+	GDVIRTUAL1RC(TypedArray<String>, _sort_code_completion_candidates, TypedArray<String>)
 
 public:
 	/* General overrides */
