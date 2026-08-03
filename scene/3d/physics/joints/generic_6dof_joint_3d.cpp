@@ -53,6 +53,9 @@ void Generic6DOFJoint3D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_flag_z", "flag", "value"), &Generic6DOFJoint3D::set_flag_z);
 	ClassDB::bind_method(D_METHOD("get_flag_z", "flag"), &Generic6DOFJoint3D::get_flag_z);
 
+	ClassDB::bind_method(D_METHOD("get_applied_force"), &Generic6DOFJoint3D::get_applied_force);
+	ClassDB::bind_method(D_METHOD("get_applied_torque"), &Generic6DOFJoint3D::get_applied_torque);
+
 	ClassDB::bind_method(D_METHOD("set_angular_target_rotation", "target_rotation"), &Generic6DOFJoint3D::set_angular_target_rotation);
 	ClassDB::bind_method(D_METHOD("get_angular_target_rotation"), &Generic6DOFJoint3D::get_angular_target_rotation);
 	ClassDB::bind_method(D_METHOD("has_target_rotation"), &Generic6DOFJoint3D::has_target_rotation);
@@ -309,6 +312,14 @@ bool Generic6DOFJoint3D::_should_replay_param(Vector3::Axis p_axis, Param p_para
 real_t Generic6DOFJoint3D::get_param_z(Param p_param) const {
 	ERR_FAIL_INDEX_V(p_param, PARAM_MAX, 0);
 	return params_z[p_param];
+}
+
+float Generic6DOFJoint3D::get_applied_force() const {
+	return PhysicsServer3D::get_singleton()->generic_6dof_joint_get_applied_force(get_rid());
+}
+
+float Generic6DOFJoint3D::get_applied_torque() const {
+	return PhysicsServer3D::get_singleton()->generic_6dof_joint_get_applied_torque(get_rid());
 }
 
 void Generic6DOFJoint3D::set_flag_x(Flag p_flag, bool p_enabled) {

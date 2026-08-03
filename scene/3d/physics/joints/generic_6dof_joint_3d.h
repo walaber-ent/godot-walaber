@@ -118,6 +118,9 @@ public:
 	void set_flag_z(Flag p_flag, bool p_enabled);
 	bool get_flag_z(Flag p_flag) const;
 
+	float get_applied_force() const;
+	float get_applied_torque() const;
+
 	void set_angular_target_rotation(const Quaternion &p_target_rotation);
 	Quaternion get_angular_target_rotation() const;
 	bool has_target_rotation() const;
