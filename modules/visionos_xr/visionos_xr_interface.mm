@@ -318,8 +318,8 @@ Transform3D VisionOSXRInterface::RenderThread::get_camera_transform() {
 	ERR_FAIL_NULL_V(xr_server, camera_transform);
 	// scale our origin point of our transform
 	float world_scale = xr_server->get_world_scale();
-	origin_from_head.origin *= world_scale;
 	camera_transform = origin_from_head;
+	camera_transform.origin *= world_scale;
 	return camera_transform;
 }
 
@@ -563,7 +563,7 @@ RID VisionOSXRInterface::RenderThread::get_depth_texture() {
 			MTL::texture_type_from_metal(depth_texture.textureType),
 			pixel_formats->getDataFormat((MTL::PixelFormat)depth_texture.pixelFormat),
 			MTL::texture_samples_from_metal(depth_texture.sampleCount),
-			RD::TEXTURE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | RD::TEXTURE_USAGE_SAMPLING_BIT,
+			RD::TEXTURE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | RD::TEXTURE_USAGE_SAMPLING_BIT | RD::TEXTURE_USAGE_DEPTH_RESOLVE_ATTACHMENT_BIT,
 			(uint64_t)depth_texture,
 			depth_texture.width,
 			depth_texture.height,
