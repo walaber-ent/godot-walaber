@@ -38,6 +38,7 @@
 #include "core/io/resource_saver.h"
 #include "core/object/callable_mp.h"
 #include "core/object/class_db.h"
+#include "core/object/editor_language.h"
 #include "core/os/keyboard.h"
 #include "core/os/os.h"
 #include "core/string/fuzzy_search.h"
@@ -681,6 +682,9 @@ void DocumentOutline::_notification(int p_what) {
 }
 
 void DocumentOutline::_tree_selected() {
+	if (updating_outline) {
+		return;
+	}
 	Control *active_editor = script_editor->get_active_editor();
 	int line = tree->get_selected()->get_metadata(0);
 	if (TextEditorBase *teb = Object::cast_to<TextEditorBase>(active_editor)) {
@@ -712,6 +716,8 @@ void DocumentOutline::update_outline() {
 		selected = ""; // Script/doc changed, forget the last selection.
 	}
 	current_editor = active_editor;
+
+	updating_outline = true;
 
 	tree->clear();
 	tree->create_item();
@@ -817,6 +823,7 @@ void DocumentOutline::update_outline() {
 			}
 		}
 	}
+	updating_outline = false;
 }
 
 void DocumentOutline::update_visibility() {
@@ -1530,7 +1537,7 @@ void ScriptEditor::trigger_live_script_reload(const String &p_script_path) {
 			reloaded_script = ResourceLoader::load(p_script_path);
 		}
 		if (reloaded_script.is_valid()) {
-			if (!reloaded_script->get_language()->validate(reloaded_script->get_source_code(), p_script_path)) {
+			if (!reloaded_script->get_language()->get_editor_language()->validate(reloaded_script->get_source_code(), p_script_path, nullptr, nullptr, nullptr, nullptr)) {
 				// Script has errors, don't live reload.
 				return;
 			}
@@ -3115,6 +3122,8 @@ void ScriptEditor::_apply_editor_settings() {
 	if (highlight_scene_scripts && !previous_highlight_scene_scripts) {
 		_connect_to_scene();
 	}
+
+	set_allow_switch_screen(!bool(EDITOR_GET("text_editor/behavior/navigation/stay_in_script_editor_on_node_selected")));
 
 	document_list->update_editor_settings();
 
