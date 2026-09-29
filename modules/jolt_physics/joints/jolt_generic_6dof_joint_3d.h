@@ -128,5 +128,7 @@ public:
 	float get_applied_force() const;
 	float get_applied_torque() const;
 
+	void set_reference_frames(const Transform3D &frame_A, const Transform3D &frame_B);
+
 	virtual void rebuild() override;
 };

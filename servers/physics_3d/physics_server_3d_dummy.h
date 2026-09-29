@@ -440,6 +440,8 @@ public:
 	virtual float generic_6dof_joint_get_applied_force(RID p_joint) const override { return 0; }
 	virtual float generic_6dof_joint_get_applied_torque(RID p_joint) const override { return 0; }
 
+	virtual void generic_6dof_joint_set_reference_frames(RID p_joint, const Transform3D &p_local_frame_A, const Transform3D &p_local_frame_B) override {}
+
 	/* MISC */
 
 	virtual void free_rid(RID p_rid) override {}

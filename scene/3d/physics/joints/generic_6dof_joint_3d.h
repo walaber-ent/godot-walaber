@@ -126,6 +126,8 @@ public:
 	bool has_target_rotation() const;
 	void clear_angular_target_rotation();
 
+	void set_reference_frames(const Transform3D &frame_A, const Transform3D &frame_B);
+
 	Generic6DOFJoint3D();
 };
 

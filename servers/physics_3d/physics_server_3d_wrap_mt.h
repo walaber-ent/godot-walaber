@@ -400,6 +400,8 @@ public:
 	FUNC2(generic_6dof_joint_set_angular_target_rotation, RID, const Quaternion &)
 	FUNC1RC(Quaternion, generic_6dof_joint_get_angular_target_rotation, RID)
 
+	FUNC3(generic_6dof_joint_set_reference_frames, RID, const Transform3D &, const Transform3D &)
+
 	FUNC1RC(PS3DE::JointType, joint_get_type, RID);
 
 	FUNC2(joint_set_solver_priority, RID, int);

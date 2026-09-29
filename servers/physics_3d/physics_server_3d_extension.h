@@ -539,6 +539,8 @@ public:
 	EXBIND2(generic_6dof_joint_set_angular_target_rotation, RID, const Quaternion &)
 	EXBIND1RC(Quaternion, generic_6dof_joint_get_angular_target_rotation, RID)
 
+	EXBIND3(generic_6dof_joint_set_reference_frames, RID, const Transform3D &, const Transform3D &)
+
 	EXBIND1RC(PS3DE::JointType, joint_get_type, RID)
 
 	EXBIND2(joint_set_solver_priority, RID, int)

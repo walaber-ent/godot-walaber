@@ -1566,6 +1566,16 @@ Quaternion JoltPhysicsServer3D::generic_6dof_joint_get_angular_target_rotation(R
 	return g6dof_joint->get_angular_target_rotation();
 }
 
+void JoltPhysicsServer3D::generic_6dof_joint_set_reference_frames(RID p_joint, const Transform3D &p_local_frame_A, const Transform3D &p_local_frame_B) {
+	JoltJoint3D *joint = joint_owner.get_or_null(p_joint);
+	ERR_FAIL_NULL(joint);
+
+	ERR_FAIL_COND(joint->get_type() != PS3DE::JOINT_TYPE_6DOF);
+	JoltGeneric6DOFJoint3D *g6dof_joint = static_cast<JoltGeneric6DOFJoint3D *>(joint);
+
+	g6dof_joint->set_reference_frames(p_local_frame_A, p_local_frame_B);
+}
+
 PS3DE::JointType JoltPhysicsServer3D::joint_get_type(RID p_joint) const {
 	const JoltJoint3D *joint = joint_owner.get_or_null(p_joint);
 	ERR_FAIL_NULL_V(joint, PS3DE::JOINT_TYPE_PIN);

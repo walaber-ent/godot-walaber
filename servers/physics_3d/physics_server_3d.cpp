@@ -449,6 +449,8 @@ void PhysicsServer3D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("generic_6dof_joint_set_angular_target_rotation", "joint", "target_rotation"), &PhysicsServer3D::generic_6dof_joint_set_angular_target_rotation);
 	ClassDB::bind_method(D_METHOD("generic_6dof_joint_get_angular_target_rotation", "joint"), &PhysicsServer3D::generic_6dof_joint_get_angular_target_rotation);
 
+	ClassDB::bind_method(D_METHOD("generic_6dof_joint_set_reference_frames", "joint", "local_frame_A", "local_frame_B"), &PhysicsServer3D::generic_6dof_joint_set_reference_frames);
+
 	ClassDB::bind_method(D_METHOD("free_rid", "rid"), &PhysicsServer3D::free_rid);
 
 	ClassDB::bind_method(D_METHOD("set_active", "active"), &PhysicsServer3D::set_active);

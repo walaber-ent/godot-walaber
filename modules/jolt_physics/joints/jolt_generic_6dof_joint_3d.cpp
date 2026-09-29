@@ -698,6 +698,13 @@ float JoltGeneric6DOFJoint3D::get_applied_torque() const {
 	return total_lambda.Length() / last_step;
 }
 
+void JoltGeneric6DOFJoint3D::set_reference_frames(const Transform3D &frame_A, const Transform3D &frame_B) {
+	local_ref_a = frame_A;
+	local_ref_b = frame_B;
+
+	rebuild();
+}
+
 void JoltGeneric6DOFJoint3D::rebuild() {
 	destroy();
 

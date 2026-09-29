@@ -1687,6 +1687,12 @@ Quaternion GodotPhysicsServer3D::generic_6dof_joint_get_angular_target_rotation(
 	return Quaternion();
 }
 
+void GodotPhysicsServer3D::generic_6dof_joint_set_reference_frames(RID p_joint, const Transform3D &p_local_frame_A, const Transform3D &p_local_frame_B)
+{
+	// not implemented for Godot physics
+	WARN_PRINT_ONCE("Setting reference frame is only implemented for Jolt Physics.");
+}
+
 void GodotPhysicsServer3D::free_rid(RID p_rid) {
 	_update_shapes(); //just in case
 
